@@ -1996,4 +1996,6 @@ using cpp2::cpp2_new;
     #define CPP2_REQUIRES_(...) requires (__VA_ARGS__)
 #endif
 
+#include "cpp2reflect.h"
+
 #endif

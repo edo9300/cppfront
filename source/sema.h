@@ -29,11 +29,11 @@ auto parser::apply_type_metafunctions( declaration_node& n )
     assert(n.is_type());
 
     //  Get the reflection state ready to pass to the function
-    auto cs = meta::compiler_services{ &errors, generated_tokens };
+    auto cs = meta::compiler_services{meta::compiler_services_data{ &errors, generated_tokens }};
     auto rtype = meta::type_declaration{ &n, cs };
 
     return apply_metafunctions(
-        n, 
+        n,
         rtype,
         [&](std::string const& msg) { error( msg, false ); }
     );
@@ -668,9 +668,9 @@ private:
         //  and this isn't generated code (ignore that for now)
         //  and this is a user-named object (not 'this', 'that', or '_')
         if (
-            i == pos                        
-            && id->position().lineno > 0    
-            && *id != "this"                
+            i == pos
+            && id->position().lineno > 0
+            && *id != "this"
             && *id != "that"
             && *id != "_"
             )
@@ -1741,7 +1741,7 @@ public:
             //  Skip type scope (member) variables
             && !(n.parent_is_type() && n.is_object())
             //  Skip unnamed variables
-            && n.identifier 
+            && n.identifier
             //  Skip non-out parameters
             && (
                 !inside_parameter_list

@@ -4639,7 +4639,7 @@ public:
             );
         }
         else {
-            emit(*n.parameters, false, false, generating_postfix_inc_dec); 
+            emit(*n.parameters, false, false, generating_postfix_inc_dec);
         }
 
         //  For an anonymous function, the emitted lambda is 'constexpr' or 'mutable'
@@ -6440,6 +6440,21 @@ public:
                 printer.preempt_position_pop();
 
                 function_returns.pop_back();
+
+                if (
+                    n.is_metafunction()
+                    && printer.get_phase() == positional_printer::phase2_func_defs
+                    )
+                {
+                    auto identifier = print_to_string(*n.identifier);
+                    printer.print_extra(
+                        "\nextern \"C\" constexpr auto cpp2_metafunction_"
+                        + identifier
+                        + " = &"
+                        + identifier
+                        + ";"
+                    );
+                }
             }
 
             //  Finally, do the potential recursions...
