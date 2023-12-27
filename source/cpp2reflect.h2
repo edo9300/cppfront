@@ -127,7 +127,7 @@ compiler_services: @polymorphic_base @copyable type =
     }
 
     protected position: (this) std::any_cast<source_position>(vposition());
-    protected vposition: (virtual this) -> std::any = source_position();
+    private vposition: (virtual this) -> std::any = source_position();
 
     //  Error diagnosis and handling, integrated with compiler output
     //  Unlike a contract violation, .requires continues further processing
@@ -196,7 +196,7 @@ type_id: @polymorphic_base @copyable type =
     template_args_count : (this) -> int         = n*.template_arguments().ssize();
     to_string           : (this) -> std::string = n*.to_string();
 
-    protected vposition: (override this) -> std::any = n*.position();
+    private vposition: (override this) -> std::any = n*.position();
 }
 */
 
@@ -243,7 +243,7 @@ declaration_base: @polymorphic_base @copyable type =
         n = n_;
     }
 
-    protected vposition: (override this) -> std::any = n*.position();
+    private vposition: (override this) -> std::any = n*.position();
 
     print: (this) -> std::string = n*.pretty_print_visualize(0);
 }

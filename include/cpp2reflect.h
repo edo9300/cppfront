@@ -117,7 +117,7 @@ class compiler_services
 
 #line 129 "cpp2reflect.h2"
     protected: [[nodiscard]] auto position() const& -> auto;
-    protected: [[nodiscard]] virtual auto vposition() const -> std::any;
+    private: [[nodiscard]] virtual auto vposition() const -> std::any;
 
     //  Error diagnosis and handling, integrated with compiler output
     //  Unlike a contract violation, .requires continues further processing
@@ -178,7 +178,7 @@ type_id: @polymorphic_base @copyable type =
     template_args_count : (this) -> int         = n.template_arguments().ssize();
     to_string           : (this) -> std::string = n.to_string();
 
-    protected vposition: (override this) -> std::any = n.position();
+    private vposition: (override this) -> std::any = n.position();
 }
 */
 
@@ -230,7 +230,7 @@ public: auto operator=(node_pointer&& that) noexcept -> node_pointer& ;
     );
 
 #line 246 "cpp2reflect.h2"
-    protected: [[nodiscard]] auto vposition() const -> std::any override;
+    private: [[nodiscard]] auto vposition() const -> std::any override;
 
     public: [[nodiscard]] auto print() const& -> std::string;
     public: virtual ~declaration_base() noexcept;
