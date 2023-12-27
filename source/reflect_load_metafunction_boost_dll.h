@@ -10,9 +10,9 @@ namespace cpp2::meta {
 
 //  Load metafunction using Boost.DLL
 //
-//  The ':'-separated library paths
-//  are read from the environment variable
-//  'CPPFRONT_METAFUNCTION_LIBRARIES'
+//  The environment variable 'CPPFRONT_METAFUNCTION_LIBRARIES'
+//  is read and interpreted as ':'-separated library paths
+//  where a metafunction symbol is looked up at
 auto load_metafunction(std::string const& name) -> std::function<void(type_declaration&)>
 {
     auto cpp1_libraries_cstr = std::getenv("CPPFRONT_METAFUNCTION_LIBRARIES");
